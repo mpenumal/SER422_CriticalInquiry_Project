@@ -62,6 +62,7 @@ function getSurveys(req, res) {
               'JOIN question_option AS qo ON qo.questionTemplateId = qt.id WHERE si.id = ? '+
               'ORDER BY jsq.questionOrder, qo.`order`', [id], function(err, surveys, fields) {
 
+              console.log(surveys);  
               var processedSurveyInstances = {
                       message: 'SUCCESS',
                       surveyInstanceID: surveys[0].sid,
@@ -72,5 +73,32 @@ function getSurveys(req, res) {
               res.json(processedSurveyInstances);
         });
     });
+
+}
+
+function deleteSurvey(req, res) {
+
+    var id = req.swagger.params.id.value;
+
+                connection.beginTransaction(function(err) {
+                   connection.query('DELETE FROM survey_instance WHERE id = ?',
+                       [id], function(err, result) {
+
+                   });
+
+                   connection.commit(function(err) {
+                     if (err) {
+                      return connection.rollback(function() {
+                         throw err;
+                      });
+                     }
+                    console.log('success!');
+
+                   });
+                 });
+
+            res.statusCode = 204;
+            res.setHeader('Location', 'http://localhost:10010/survey');
+            res.send();
 
 }

@@ -6,7 +6,7 @@ var moment = require('moment');
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
-   password : 'B5pashabaa*',
+   password : 'root',
    database : 'prp_development'
  });
 

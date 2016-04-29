@@ -83,7 +83,69 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-			
+    delete:
+      description: "delete survey of patient"
+      operationId: deleteSurvey
+      parameters:
+        - name: id
+          in: path
+          description: "Survey instance ID"
+          required: true
+          type: "integer"
+      responses:
+        "204":
+          description: SUCCESSFUL DELETE
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DeleteSurveyResponse"
+        "404":
+          description: Improper Client Request
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Server Error
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"        
+
+  /survey:
+    x-swagger-router-controller: submit-survey
+    post:
+      description: "submit survey of patient"
+      operationId: submitSurvey
+      parameters:
+        - name: body
+          in: body
+          description: "Survey taken by patient"
+          required: true
+          schema:
+            $ref: "#/definitions/SurveyData"
+      responses:
+        "201":
+          description: Created
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/PostSurveyResponse"
+        "404":
+          description: Improper Client Request
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Server Error
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -94,6 +156,45 @@ definitions:
     properties:
       message:
         type: string
+  GetSurveyResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  PostSurveyResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  DeleteSurveyResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string      
+  SurveyData:
+    type: object
+    properties:
+      surveyInstanceID:
+        type: integer
+      timeStamp:
+        type: integer
+      surveyResults:
+        type: array
+        items:
+          properties:
+            quesID:
+              type: string
+            selectedOptions:
+              type: array
+              items:
+                type: string
+            bodyPain:
+              type: array
+              items:
+                type: string
   ErrorResponse:
     required:
       - message
