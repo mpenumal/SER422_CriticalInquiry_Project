@@ -14,18 +14,9 @@ module.exports = {
   submitSurvey: submitSurvey
 }
 
-function processResponse(survey) {
-
-  return {
-          id: survey[0].id
-  };
-
-}
-
 function submitSurvey(req, res) {
 
     const surveyInstanceID = req.swagger.params.body.value.surveyInstanceID;
-    console.log(surveyInstanceID);
     const questionInstArr = [];
     const currentDate = new Date();
     const endDate = moment(currentDate).add(2, 'day').toDate();

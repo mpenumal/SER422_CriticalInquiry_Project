@@ -18,7 +18,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /patient/{userPIN}/surveys:
+  /patients/{userPIN}/surveys:
     x-swagger-router-controller: check-surveys
     get:
       description: "Check the available current and future survey instances associated with a patient."
@@ -49,9 +49,9 @@ paths:
         default:
           description: "Error"
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
 
-  /survey/{id}:
+  /surveys/{id}:
     x-swagger-router-controller: get-survey
     get:
       description: "Get a particular survey instance associated with a patient."
@@ -111,9 +111,9 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"        
+            $ref: "#/definitions/ErrorResponse"
 
-  /survey:
+  /surveys:
     x-swagger-router-controller: submit-survey
     post:
       description: "Create a new survey along with the associated answers chosen by the patient."
@@ -145,7 +145,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -173,7 +173,7 @@ definitions:
       - message
     properties:
       message:
-        type: string      
+        type: string
   SurveyData:
     type: object
     properties:
