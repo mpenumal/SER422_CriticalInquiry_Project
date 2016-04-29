@@ -21,60 +21,60 @@ paths:
   /patient/{userPIN}/surveys:
     x-swagger-router-controller: check-surveys
     get:
-      description: "check status of survey instances associated with patient"
+      description: "Check the available current and future survey instances associated with a patient."
       operationId: checkSurveys
       parameters:
         - name: userPIN
           in: path
-          description: "User Pin of patient"
+          description: "User Pin of a patient."
           required: true
           type: "integer"
       responses:
         "200":
-          description: Success
+          description: "Successfully retrieved the current and future survey instances associated with the patient."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/SurveyResponse"
         "404":
-          description: Improper Client Request
+          description: "Improper Client Request - Input parameter is not of expected format."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
         "500":
-          description: Server Error
+          description: "Server Error"
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
         # responses may fall through to errors
         default:
-          description: Error
+          description: "Error"
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
   /survey/{id}:
     x-swagger-router-controller: get-survey
     get:
-      description: "get survey instance of patient"
+      description: "Get a particular survey instance associated with a patient."
       operationId: getSurveys
       parameters:
         - name: id
           in: path
-          description: "Survey instance ID"
+          description: "ID of the Survey instance."
           required: true
           type: "integer"
       responses:
         "200":
-          description: Success
+          description: "Successfully retrieved the survey instance."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetSurveyResponse"
         "404":
-          description: Improper Client Request
+          description: "Improper Client Request - Input parameter is not of expected format."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
         "500":
-          description: Server Error
+          description: "Server Error"
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
@@ -84,7 +84,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     delete:
-      description: "delete survey of patient"
+      description: "Delete a survey associated with a patient."
       operationId: deleteSurvey
       parameters:
         - name: id
@@ -94,17 +94,17 @@ paths:
           type: "integer"
       responses:
         "204":
-          description: SUCCESSFUL DELETE
+          description: "Survey deleted successfully."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/DeleteSurveyResponse"
         "404":
-          description: Improper Client Request
+          description: "Improper Client Request - Input parameter is not of expected format."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
         "500":
-          description: Server Error
+          description: "Server Error"
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
@@ -116,7 +116,7 @@ paths:
   /survey:
     x-swagger-router-controller: submit-survey
     post:
-      description: "submit survey of patient"
+      description: "Create a new survey along with the associated answers chosen by the patient."
       operationId: submitSurvey
       parameters:
         - name: body
@@ -127,17 +127,17 @@ paths:
             $ref: "#/definitions/SurveyData"
       responses:
         "201":
-          description: Created
+          description: "New survey information stored."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/PostSurveyResponse"
         "404":
-          description: Improper Client Request
+          description: "Improper Client Request - Input parameter is not of expected format."
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
         "500":
-          description: Server Error
+          description: "Server Error"
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ErrorResponse"
