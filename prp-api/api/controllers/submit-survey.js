@@ -25,9 +25,10 @@ function processResponse(survey) {
 function submitSurvey(req, res) {
 
     const surveyInstanceID = req.swagger.params.body.value.surveyInstanceID;
+    console.log(surveyInstanceID);
     const questionInstArr = [];
     const currentDate = new Date();
-    const endDate = moment(currentDate).add(2, 'day');
+    const endDate = moment(currentDate).add(2, 'day').toDate();
 
     connection.query('SELECT * from survey_instance where id = ?', [surveyInstanceID] ,function(err, surveyInstance, fields) {
        connection.query('SELECT * from question_result',function(err, questionResults, fields) {
